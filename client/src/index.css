@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Playfair+Display:ital,wght@1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary:   #FAF7F2;
+    --bg-secondary: #F0E8DB;
+    --text-primary: #2A2012;
+    --text-muted:   #7A6A58;
+    --accent-1:     #C9A0DC;
+    --accent-2:     #7FAE7A;
+    --accent-3:     #D8A47F;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(201, 160, 220, 0.3);
+    color: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #D8A47F;
+    border-radius: 9999px;
+  }
+}
+
+@layer components {
+  .glass {
+    background: rgba(250, 247, 242, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-dark {
+    background: rgba(30, 34, 51, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px 0 rgba(30,34,51,0.16);
+  }
+
+  .shimmer-text {
+    background: linear-gradient(90deg, #C9A0DC, #D8A47F, #7FAE7A, #C9A0DC);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .pixel-border {
+    image-rendering: pixelated;
+    border: 3px solid;
+    border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Crect x='0' y='0' width='3' height='3' fill='%23C9A0DC'/%3E%3Crect x='5' y='0' width='3' height='3' fill='%23C9A0DC'/%3E%3Crect x='0' y='5' width='3' height='3' fill='%23C9A0DC'/%3E%3Crect x='5' y='5' width='3' height='3' fill='%23C9A0DC'/%3E%3C/svg%3E") 3;
+  }
+
+  .stat-bar-fill {
+    transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Pixel art utility: disable sub-pixel smoothing */
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* ── Loading dots ── */
+.loading-dots span {
+  animation: loadDot 1.4s infinite both;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loadDot {
+  0%, 80%, 100% { transform: scale(0); opacity: 0.3; }
+  40%            { transform: scale(1); opacity: 1; }
+}
+
+/* ── Pixel heading utilities ───────────────────────────────────────── */
+.pixel-heading {
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* Cute shimmer on pixel headings */
+.pixel-heading-shimmer {
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.8;
+  background: linear-gradient(90deg, #7c3f8e, #C9A0DC, #F2B6C6, #C9A0DC, #7c3f8e);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Pixel text shadow for depth */
+.pixel-shadow {
+  text-shadow:
+    2px 2px 0 rgba(124, 63, 142, 0.15),
+    4px 4px 0 rgba(124, 63, 142, 0.08);
+}
+
+/* Blinking cursor after pixel headings */
+.pixel-cursor::after {
+  content: '▋';
+  animation: pixelBlink 1s step-end infinite;
+  margin-left: 2px;
+  font-family: 'Press Start 2P', monospace;
+}
